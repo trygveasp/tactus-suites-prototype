@@ -1,0 +1,39 @@
+[project]
+  name = "tactus_suites"
+  version = "1.5.0"
+  description = "Suites for the Tactus scripting system."
+  requires-python = ">=3.10,<3.13"
+  license = {text = "MIT"}
+  authors = [{name = "ACCORD"}]
+  keywords = ["forecasting", "tactus", "weather"]
+  dependencies = [
+    "tactus @ git+https://github.com/trygveasp/tactus-engine-prototype.git",
+    "tactus_tasks @ git+https://github.com/trygveasp/tactus-tasks-prototype.git"
+  ]
+
+[dependency-groups]
+  dev = ["pre-commit>=3.0.4", "ruff (>=0.15.10,<0.16.0)"]
+  doc = [
+    "jsonref>=1.1.0",
+    "myst-parser>=2.0.0",
+    "sphinx>=7.2.6",
+    "sphinx-rtd-theme>=1.3.0",
+  ]
+  test = [
+    "pytest>=7.2.2",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.7.0",
+    "pytest-profiling>=1.7.0",
+    "pytest-timeout>=2.1.0",
+    "pytest-xdist>=3.2.0",
+  ]
+
+[build-system]
+  requires = ["poetry-core >= 1.0.0"]
+  build-backend = "poetry.core.masonry.api"
+
+# pytest configs
+[tool.pytest.ini_options]
+  addopts = "-v --failed-first --cov-report=term-missing --cov-report=term:skip-covered --cov-report=xml:.coverage.xml --cov=./"
+  log_cli_level = "INFO"
+  testpaths = ["tests/smoke", "tests/unit"]
